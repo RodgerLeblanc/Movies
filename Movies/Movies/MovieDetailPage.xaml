@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Movies.MovieDetailPage">
+    <ScrollView>
+        <StackLayout>
+            <Frame BorderColor="Goldenrod" 
+                   HasShadow="True"
+                   CornerRadius="15"
+                   IsClippedToBounds="True">
+                
+                <Image HorizontalOptions="Center"
+                   Source="{Binding Poster}"
+                   Aspect="AspectFit"
+                   Margin="10" 
+                   MinimumHeightRequest="200"/>
+            </Frame>
+
+            <StackLayout HorizontalOptions="FillAndExpand" IsEnabled="False">
+                <Entry Text="{Binding Title, StringFormat='TItle : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Entry Text="{Binding Year, StringFormat='Year : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Entry Text="{Binding Released, StringFormat='Released : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Entry Text="{Binding Genre, StringFormat='Genre : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Entry Text="{Binding Actors, StringFormat='Actors : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Entry Text="{Binding imdbRating, StringFormat='imdbRating : {0}'}" HorizontalOptions="FillAndExpand" />
+                <Editor Text="{Binding Plot, StringFormat='Plot : {0}'}" HorizontalOptions="FillAndExpand" AutoSize="TextChanges" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

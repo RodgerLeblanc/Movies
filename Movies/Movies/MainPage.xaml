@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Movies"
+             x:Class="Movies.MainPage">
+    <Grid>
+        <Grid.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0, 20, 0, 0" />
+                <On Platform="Android" Value="0, 0, 0, 0" />
+                <On Platform="UWP" Value="0, 0, 0, 0" />
+            </OnPlatform>
+        </Grid.Margin>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <SearchBar x:Name="searchBar" 
+                   SearchButtonPressed="searchBar_SearchButtonPressed"
+                   TextChanged="SearchBar_TextChanged" />
+
+        <ListView x:Name="listView" 
+                  Grid.Row="1"
+                  HasUnevenRows="True"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="listView_Refreshing"
+                  ItemSelected="listView_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!--<ImageCell ImageSource="{Binding Poster}"
+                               Text="{Binding Title}"
+                               Detail="{Binding Year}" />-->
+                    <ViewCell>
+                        <StackLayout>
+                            <Frame BorderColor="Black" 
+                                   OutlineColor="Azure"
+                                   HasShadow="True"
+                                   CornerRadius="15"
+                                   Padding="0"
+                                   Margin="5,5"
+                                   IsClippedToBounds="True"
+                                   HorizontalOptions="FillAndExpand">
+                                <Grid BackgroundColor="LightGray">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame BorderColor="Goldenrod" 
+                                           HasShadow="True"
+                                           CornerRadius="15"
+                                           Padding="0"
+                                           Margin="5"
+                                           IsClippedToBounds="True"
+                                           HorizontalOptions="FillAndExpand">
+
+                                        <Grid HeightRequest="130">
+                                            <Label HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Text="No Image" />
+
+                                            <Image Source="{Binding Poster}"
+                                                   WidthRequest="90"
+                                                   HeightRequest="130" 
+                                                   Aspect="AspectFit" />
+                                        </Grid>
+                                    </Frame>
+
+                                    <StackLayout Grid.Column="1"
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding Title}" 
+                                               FontSize="Medium" 
+                                               FontAttributes="Bold" />
+
+                                        <Label Text="{Binding Year}" 
+                                               FontSize="Small" 
+                                               Opacity="0.8" />
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <!--Avoid showing empty rows on iOS-->
+            <ListView.Footer>
+                <StackLayout />
+            </ListView.Footer>
+        </ListView>
+
+        <Label x:Name="noResultsLabel"
+               Grid.Row="1" 
+               Text="No results" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+    </Grid>
+</ContentPage>
